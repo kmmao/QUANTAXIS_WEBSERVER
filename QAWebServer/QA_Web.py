@@ -34,6 +34,7 @@ from tornado_http2.server import Server
 
 from QAWebServer.arphandles import (AccountHandler, PortfolioHandler,
                                     RiskHandler)
+from QAWebServer.apphandler import AppHandler
 from QAWebServer.basehandles import QABaseHandler
 from QAWebServer.commandhandler import (CommandHandler, CommandHandlerWS,
                                         RunnerHandler)
@@ -46,7 +47,7 @@ from QAWebServer.jobhandler import FileRunHandler, JOBHandler
 from QAWebServer.quotationhandles import (MonitorSocketHandler,
                                           RealtimeSocketHandler,
                                           SimulateSocketHandler,
-                                          future_realtime, stock_realtime)
+                                          future_realtime, stock_realtime, price_realtime)
 from QAWebServer.strategyhandlers import BacktestHandler, StrategyHandler
 from QAWebServer.tradehandles import AccModelHandler, TradeInfoHandler
 from QAWebServer.userhandles import (PersonBlockHandler, SigninHandler,
@@ -73,6 +74,8 @@ class INDEX(QABaseHandler):
 handlers = [
     (r"/",
      INDEX),
+    (r"/app/market",
+    AppHandler),
     (r"/codelist",
      CurrentListHandler),
     (r"/marketdata/future/code",
@@ -115,6 +118,8 @@ handlers = [
      stock_realtime),
     (r"/realtime/future",
      future_realtime),
+    (r"/realtime/price",
+     price_realtime),
     (r"/simulate",
      SimulateSocketHandler),
     (r"/monitor",
